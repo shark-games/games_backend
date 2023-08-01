@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./VChess.sol";
+import "./SChess.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 
@@ -124,7 +124,7 @@ contract gameController is Ownable {
         onlyAdmin
         returns (bool)
     {
-        VChess token = VChess(tokenAddress);
+        SChess token = SChess(tokenAddress);
         // transfer to treasury the balance locked in escrow
         token.transfer(
             balances[_player][_gameId].treasury,
@@ -150,7 +150,7 @@ contract gameController is Ownable {
             "Already withdrawn"
         );
 
-        VChess token = VChess(tokenAddress);
+        SChess token = SChess(tokenAddress);
         // transfer to player of game (msg.sender) the value locked in escrow
         token.transfer(msg.sender, balances[msg.sender][_gameId].balance);
         // TODO: add post-transfer funcs to `_afterTokenTransfer` to validate transfer
